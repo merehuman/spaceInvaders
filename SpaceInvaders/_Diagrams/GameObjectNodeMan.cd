@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SE456.GameObjectNodeMan">
+    <Position X="0.5" Y="4.25" Width="1.75" />
+    <Members>
+      <Method Name="derivedCreateNode" Hidden="true" />
+      <Method Name="DumpStats" Hidden="true" />
+      <Method Name="GameObjectNodeMan" Hidden="true" />
+      <Method Name="privGetInstance" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAACAAABpAAAAIBIAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObject\GameObjectNodeMan.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="psGameObjectNodeCompare" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SE456.ManBase" Collapsed="true">
+    <Position X="0.5" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>CAAAAIAEAAAAAAiCAgAAIgAAQCAIAgAEABAAAAAAAAA=</HashCode>
+      <FileName>Manager\ManBase.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="poActive" />
+      <Field Name="poReserve" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SE456.ListBase" Collapsed="true">
+    <Position X="3.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAs=</HashCode>
+      <FileName>Manager\ListBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.GameObjectNode">
+    <Position X="6" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAABAAAAAAAAAAAAAAAABAAAAhAAAAABAA=</HashCode>
+      <FileName>GameObject\GameObjectNode.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pGameObj" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SE456.DLink" Collapsed="true">
+    <Position X="6" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAgAAAAAAAIAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Manager\DLink\DLink.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.NodeBase" Collapsed="true">
+    <Position X="6" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAIAAgAAgAAAAAAAQBAAAAhAAAAABAA=</HashCode>
+      <FileName>Manager\NodeBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.DLinkMan">
+    <Position X="3.5" Y="4" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAABgAAAAAAAAACAAAAAAAAAAs=</HashCode>
+      <FileName>Manager\DLink\DLinkMan.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="poHead" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SE456.GameObject">
+    <Position X="3.5" Y="6.75" Width="1.5" />
+    <Members>
+      <Method Name="~GameObject" Hidden="true" />
+      <Method Name="GameObject" Hidden="true" />
+      <Method Name="GetName" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="SE456.GameObject.Name" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>GameObject\GameObject.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAgAAAAAAEAAAAAABgAAEABAA=</HashCode>
+      <FileName>GameObject\GameObject.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pSpriteProxy" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SE456.BirdGreen" Collapsed="true">
+    <Position X="4" Y="10.75" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObject\Birds\BirdGreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.BirdRed" Collapsed="true">
+    <Position X="5.5" Y="10.75" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObject\Birds\BirdRed.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.BirdWhite" Collapsed="true">
+    <Position X="2.5" Y="10.75" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObject\Birds\BirdWhite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.BirdYellow" Collapsed="true">
+    <Position X="7" Y="10.75" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObject\Birds\BirdYellow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.GameObjectNull" Collapsed="true">
+    <Position X="0.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObject\GameObjectNull.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.SpriteGameProxy" Collapsed="true">
+    <Position X="1" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAABAAAAAAAAAgAAAAEABAAABhgAAAADAA=</HashCode>
+      <FileName>Sprite\SpriteGameProxy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.BirdBase" Collapsed="true">
+    <Position X="3.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObject\Birds\BirdBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

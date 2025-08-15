@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Manages --&gt;">
+    <Position X="7.37" Y="4.963" Height="0.292" Width="0.918" />
+  </Comment>
+  <Comment CommentText="Manages --&gt;">
+    <Position X="2.134" Y="5.069" Height="0.292" Width="0.941" />
+  </Comment>
+  <Class Name="SE456.SpriteBatchMan">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <Members>
+      <Method Name="derivedCreateNode" Hidden="true" />
+      <Method Name="DumpStats" Hidden="true" />
+      <Method Name="privGetInstance" Hidden="true" />
+      <Method Name="SpriteBatchMan" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAAAgAAAAQBpAAAAABIAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprite\Batch\SpriteBatchMan.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.ManBase">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>CAAAAIAEAAAAAAiCAgAAIgAAQCAIAgAEABAAAAAAAAA=</HashCode>
+      <FileName>Manager\ManBase.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="poActive" />
+      <Field Name="poReserve" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SE456.ListBase">
+    <Position X="3.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAs=</HashCode>
+      <FileName>Manager\ListBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.DLinkMan" Collapsed="true">
+    <Position X="3.25" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAABgAAAAAAAAACAAAAAAAAAAs=</HashCode>
+      <FileName>Manager\DLink\DLinkMan.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="poHead" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SE456.DLink" Collapsed="true">
+    <Position X="3.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAgAAAAAAAIAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Manager\DLink\DLink.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.SpriteBatch">
+    <Position X="3.25" Y="4.25" Width="1.5" />
+    <Members>
+      <Method Name="GetName" Hidden="true" />
+      <Method Name="GetSpriteNodeMan" Hidden="true" />
+      <Method Name="Set" Hidden="true" />
+      <Method Name="SetName" Hidden="true" />
+      <Method Name="SpriteBatch" Hidden="true" />
+    </Members>
+    <NestedTypes>
+      <Enum Name="SE456.SpriteBatch.Name" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Sprite\Batch\SpriteBatch.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAgABAAAAAAAAAAAAIAAABAAAAgAQAAABAA=</HashCode>
+      <FileName>Sprite\Batch\SpriteBatch.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="poSpriteNodeMan" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SE456.SpriteNodeMan" HideInheritanceLine="true">
+    <Position X="5.75" Y="4.25" Width="1.5" />
+    <Members>
+      <Method Name="derivedCreateNode" Hidden="true" />
+      <Method Name="DumpStats" Hidden="true" />
+      <Method Name="SpriteNodeMan" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABgAAAAAApAAAAIAIAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Sprite\Batch\SpriteNodeMan.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.SpriteNode" HideInheritanceLine="true">
+    <Position X="8.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAgAAAAAABAAAAgAAAAABAA=</HashCode>
+      <FileName>Sprite\Batch\SpriteNode.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pSprite" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SE456.SpriteGame" Collapsed="true" HideInheritanceLine="true">
+    <Position X="8.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAABAAAACAJABAQAgAAAAAAAAAABAAARhgAABABAA=</HashCode>
+      <FileName>Sprite\SpriteGame\SpriteGame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

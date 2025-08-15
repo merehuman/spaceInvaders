@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SE456.Component" Collapsed="true" HideInheritanceLine="true">
+    <Position X="2.75" Y="3" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAgAAAAAAAAAAABAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Composite\Component.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.Composite" Collapsed="true">
+    <Position X="4.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAABAAAAAAAQAAAAAAAQIAEAAA=</HashCode>
+      <FileName>Composite\Composite.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="poDLinkMan" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SE456.Leaf" Collapsed="true">
+    <Position X="1.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Composite\Leaf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.GameObject" Collapsed="true">
+    <Position X="2.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAEAAAAAAAAAAAgAAAAAAEIAAAAABgAIEABAA=</HashCode>
+      <FileName>GameObject\GameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.BirdBase" Collapsed="true">
+    <Position X="1.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObject\Birds\BirdBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.BirdGreen" Collapsed="true">
+    <Position X="0.5" Y="8.75" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObject\Birds\BirdGreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.BirdRed" Collapsed="true">
+    <Position X="3.5" Y="8.75" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObject\Birds\BirdRed.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.BirdWhite" Collapsed="true">
+    <Position X="2" Y="8.75" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObject\Birds\BirdWhite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.BirdYellow" Collapsed="true">
+    <Position X="5" Y="8.75" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObject\Birds\BirdYellow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.DLink" Collapsed="true" HideInheritanceLine="true">
+    <Position X="9.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAIAAgAAAAAAAIAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Manager\DLink\DLink.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.DLinkMan" Collapsed="true">
+    <Position X="7.25" Y="5.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAABgAAAAAAAAACAAAAAAAAAAs=</HashCode>
+      <FileName>Manager\DLink\DLinkMan.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="poHead" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SE456.BirdGrid" Collapsed="true">
+    <Position X="5.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObject\Birds\BirdGrid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.BirdColumn" Collapsed="true">
+    <Position X="3.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>GameObject\Birds\BirdColumn.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.IteratorCompositeBase">
+    <Position X="5.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAECAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Composite\IteratorCompositeBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SE456.IteratorForwardComposite" Collapsed="true">
+    <Position X="5.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAFCAAAAAAAQAAAAIAAAAAAAAACAAAAAAAAAQCAAA=</HashCode>
+      <FileName>Composite\IteratorForwardComposite.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pRoot" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SE456.IteratorReverseComposite" Collapsed="true">
+    <Position X="7.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAECAAAAAAAQAAABIAAAAAAIAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Composite\IteratorReverseComposite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
