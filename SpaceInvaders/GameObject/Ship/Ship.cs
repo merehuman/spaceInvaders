@@ -109,9 +109,10 @@ namespace SE456
             this.MoveState.MoveLeft(this);
         }
 
-        public void ShootMissile()
+        /// <returns>True if a missile was actually fired (not already flying).</returns>
+        public bool ShootMissile()
         {
-            this.MissileState.ShootMissile(this);
+            return this.MissileState.ShootMissile(this);
         }
 
         public void SetState(ShipMan.MissileState inState)

@@ -9,9 +9,9 @@ namespace SE456
     class ShipMissileFlying : ShipMissileState
     {
 
-        public override void ShootMissile(Ship pShip)
+        public override bool ShootMissile(Ship pShip)
         {
-
+            return false;
         }
     }
 }

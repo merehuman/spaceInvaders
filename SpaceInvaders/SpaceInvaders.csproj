@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -327,26 +327,67 @@
     <Resource Include="Resources\Consolas20pt.xml" />
     <Resource Include="Resources\Consolas36pt.png" />
     <Resource Include="Resources\Consolas36pt.xml" />
-    <Content Include="Resources\Engine_X86Debug.dll" />
-    <Content Include="Resources\explosion.wav" />
-    <Content Include="Resources\fastinvader1.wav" />
-    <Content Include="Resources\fastinvader2.wav" />
-    <Content Include="Resources\fastinvader3.wav" />
-    <Content Include="Resources\fastinvader4.wav" />
-    <Content Include="Resources\File_X86Debug.dll" />
-    <Content Include="Resources\ikpFlac.dll" />
-    <Content Include="Resources\ikpMP3.dll" />
-    <Content Include="Resources\invaderkilled.wav" />
-    <Content Include="Resources\irrKlang.NET4.dll" />
-    <Content Include="Resources\Manager_X86Debug.dll" />
-    <Content Include="Resources\Math_X86Debug.dll" />
-    <Content Include="Resources\PCSTree_X86Debug.dll" />
-    <Content Include="Resources\shoot.wav" />
-    <Content Include="Resources\SpaceInvadersDebugX86.dll" />
-    <Content Include="Resources\theme.wav" />
-    <Content Include="Resources\Time_X86Debug.dll" />
-    <Content Include="Resources\ufo_highpitch.wav" />
-    <Content Include="Resources\ufo_lowpitch.wav" />
+    <!-- Native Azul + irrKlang deps must sit next to SpaceInvaders.exe or SpaceInvadersDebugX86.dll fails to load. -->
+    <Content Include="Resources\Engine_X86Debug.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\explosion.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\fastinvader1.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\fastinvader2.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\fastinvader3.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\fastinvader4.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\File_X86Debug.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ikpFlac.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ikpMP3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\invaderkilled.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\irrKlang.NET4.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Manager_X86Debug.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Math_X86Debug.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PCSTree_X86Debug.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\shoot.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\SpaceInvadersDebugX86.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\theme.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Time_X86Debug.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ufo_highpitch.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ufo_lowpitch.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

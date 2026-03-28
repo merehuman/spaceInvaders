@@ -172,24 +172,24 @@ namespace SE456
             DetachDemoInvaderSprites();
 
             TimedCharacterFactory.Install("P  L  A  Y", 0.5f, 0.30f, 306, 550, 0.9f, 0.9f, 0.9f);
-            TimedCharacterFactory.Install("S  P  A  C  E         I  N  V  A  D  E  R  S", 5.0f, 0.10f, 193, 475, 0.9f, 0.9f, 0.9f);
-            TimedCharacterFactory.Install("* S  C  O  R  E    A  D  V  A  N  C  E    T  A  B  L  E *", 6.0f, 0.10f, 140, 350, 0.9f, 0.9f, 0.9f);
+            TimedCharacterFactory.Install("S  P  A  C  E         I  N  V  A  D  E  R  S", 1.0f, 0.10f, 193, 475, 0.9f, 0.9f, 0.9f);
+            TimedCharacterFactory.Install("* S  C  O  R  E    A  D  V  A  N  C  E    T  A  B  L  E *", 4.0f, 0.10f, 140, 350, 0.9f, 0.9f, 0.9f);
             TimedCharacterFactory.Install("=  ?   M Y S T E R Y", 8.0f, 0.10f, 265, 300, 0.9f, 0.9f, 0.9f);
-            TimedCharacterFactory.Install("=  3 0   P O I N T S", 10.0f, 0.10f, 265, 250, 0.9f, 0.9f, 0.9f);
-            TimedCharacterFactory.Install("=  2 0   P O I N T S", 13.0f, 0.10f, 265, 200, 0.9f, 0.9f, 0.9f);
-            TimedCharacterFactory.Install("=  1 0   P O I N T S", 16.0f, 0.10f, 265, 150, 0.2f, 0.8f, 0.2f);
+            TimedCharacterFactory.Install("=  3 0   P O I N T S", 9.0f, 0.10f, 265, 250, 0.9f, 0.9f, 0.9f);
+            TimedCharacterFactory.Install("=  2 0   P O I N T S", 10.0f, 0.10f, 265, 200, 0.9f, 0.9f, 0.9f);
+            TimedCharacterFactory.Install("=  1 0   P O I N T S", 11.0f, 0.10f, 265, 150, 0.2f, 0.8f, 0.2f);
 
             TimedSpriteCmd pTimedCmd = new TimedSpriteCmd(SpriteGame.Name.UFO1);
-            TimerEventMan.Add(TimerEvent.Name.TimedSprite, pTimedCmd, 6.5f);
+            TimerEventMan.Add(TimerEvent.Name.TimedSprite, pTimedCmd, 7.5f);
 
             TimedSpriteCmd pTimedCmd2 = new TimedSpriteCmd(SpriteGame.Name.Squid1);
-            TimerEventMan.Add(TimerEvent.Name.TimedSprite, pTimedCmd2, 9.5f);
+            TimerEventMan.Add(TimerEvent.Name.TimedSprite, pTimedCmd2, 8.5f);
 
             TimedSpriteCmd pTimedCmd3 = new TimedSpriteCmd(SpriteGame.Name.Crab1);
-            TimerEventMan.Add(TimerEvent.Name.TimedSprite, pTimedCmd3, 12.5f);
+            TimerEventMan.Add(TimerEvent.Name.TimedSprite, pTimedCmd3, 9.5f);
 
             TimedSpriteCmd pTimedCmd4 = new TimedSpriteCmd(SpriteGame.Name.Octopus1);
-            TimerEventMan.Add(TimerEvent.Name.TimedSprite, pTimedCmd4, 15.5f);
+            TimerEventMan.Add(TimerEvent.Name.TimedSprite, pTimedCmd4, 10.5f);
         }
 
         private static void DetachDemoInvaderSprites()

@@ -8,8 +8,8 @@ namespace SE456
 {
     abstract public class ShipMissileState
     {
-        // Transitions to correct state
-        public abstract void ShootMissile(Ship pShip);
+        /// <returns>True if a new missile was spawned (Ready → Flying).</returns>
+        public abstract bool ShootMissile(Ship pShip);
     }
 }
 

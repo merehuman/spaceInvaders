@@ -25,7 +25,10 @@ namespace SE456
             }
 
             Ship pShip = ShipMan.GetShip();
-            pShip.ShootMissile();
+            if (!pShip.ShootMissile())
+            {
+                return;
+            }
 
             pSndEngine.SoundVolume = 0.2f;
             pSndEngine.Play2D(pSnd0, false, false, false);
