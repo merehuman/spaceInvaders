@@ -69,6 +69,16 @@ namespace SE456
             pColPair.NotifyListeners();
         }
 
+        public override void VisitGroup(InvaderGrid b)
+        {
+            ColPair.Collide((GameObject)IteratorForwardComposite.GetChild(b), this);
+        }
+
+        public override void VisitColumn(InvaderColumn b)
+        {
+            ColPair.Collide((GameObject)IteratorForwardComposite.GetChild(b), this);
+        }
+
         public override void VisitCrab(Crab c)
         {
             ColPair pColPair = ColPairMan.GetActiveColPair();

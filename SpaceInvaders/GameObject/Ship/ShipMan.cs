@@ -79,6 +79,12 @@ namespace SE456
             ShipMan pShipMan = ShipMan.privInstance();
             Debug.Assert(pShipMan != null);
 
+            if (pShipMan.pShip != null)
+            {
+                pShipMan.pShip.Remove();
+                pShipMan.pShip = null;
+            }
+
             pShipMan.pShip = ActivateShip();
             pShipMan.pShip.SetState(ShipMan.MoveState.MoveBoth);
             pShipMan.pShip.SetState(ShipMan.MissileState.Ready);
@@ -212,7 +218,11 @@ namespace SE456
 
             // Attach the sprite to the correct sprite batch
             SpriteBatch pSB_Aliens = SpriteBatchMan.Find(SpriteBatch.Name.Invaders);
+            SpriteBatch pSB_Boxes = SpriteBatchMan.Find(SpriteBatch.Name.Boxes);
+            Debug.Assert(pSB_Boxes != null);
             pSB_Aliens.Attach(pShip);
+            // ColObject creates a SpriteBox; it must be in a batch so GameObject.Remove can detach it on restart.
+            pShip.ActivateCollisionSprite(pSB_Boxes);
 
             // Attach the missile to the missile root
             GameObject pShipRoot = GameObjectNodeMan.Find(GameObject.Name.ShipRoot);

@@ -44,6 +44,12 @@ namespace SE456
             ColPair.Collide(s, pGameObj);
         }
 
+        public override void VisitShip(Ship s)
+        {
+            GameObject pGameObj = (GameObject)IteratorForwardComposite.GetChild(this);
+            ColPair.Collide(s, pGameObj);
+        }
+
         public override void Update()
         {
             // Debug.WriteLine("update: {0}", this);

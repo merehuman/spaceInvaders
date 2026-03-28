@@ -62,6 +62,10 @@ namespace SE456
 		}
 		override public void Wash()
         {
+            if (this.pSpriteBase != null)
+            {
+                this.pSpriteBase.ClearSpriteNode();
+            }
             this.pSpriteBase = null;
 
             base.baseWash();

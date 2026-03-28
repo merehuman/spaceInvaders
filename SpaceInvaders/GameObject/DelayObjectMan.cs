@@ -43,6 +43,21 @@ namespace SE456
                 pDelayMan.poSLinkMan.Remove(pTmp);
             }
         }
+
+        static public bool HasPending()
+        {
+            return DelayedObjectMan.privGetInstance().poSLinkMan.poHead != null;
+        }
+
+        static public void ProcessUntilEmpty()
+        {
+            int guard = 0;
+            while (HasPending() && guard++ < 64)
+            {
+                Process();
+            }
+            Debug.Assert(!HasPending(), "DelayedObjectMan.ProcessUntilEmpty exceeded iteration limit");
+        }
         private DelayedObjectMan()
         {
             this.poSLinkMan = new SLinkMan();

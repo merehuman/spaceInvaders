@@ -126,35 +126,24 @@ namespace SE456
         }
         public virtual void Remove()
         {
-          //  Debug.WriteLine("REMOVE: {0}", this);
-
-            // Keenan(delete.A)
-            // -----------------------------------------------------------------
-            // Very difficult at first... if you are messy, you will pay here!
-            // Given a game object....
-            // -----------------------------------------------------------------
-
-            // Remove from SpriteBatch
-
-            // Find the SpriteNode
+            // Remove from SpriteBatch (skip if never attached — wrong active SpriteBatchMan)
             Debug.Assert(this.pSpriteProxy != null);
-            SpriteNode pSpriteNode = this.pSpriteProxy.GetSpriteNode();
-
-            // Remove it from the manager
-            Debug.Assert(pSpriteNode != null);
-            SpriteBatchMan.Remove(pSpriteNode);
+            if (this.pSpriteProxy.HasSpriteNode())
+            {
+                SpriteNode pSpriteNode = this.pSpriteProxy.GetSpriteNode();
+                SpriteBatchMan.Remove(pSpriteNode);
+            }
 
             // 1) Don't Need to remove it from ProxySpriteMan
             // Since it is being recycled on the GhostMan
 
-            // Remove collision sprite from spriteBatch
-
             Debug.Assert(this.poColObj != null);
             Debug.Assert(this.poColObj.pColSprite != null);
-            pSpriteNode = this.poColObj.pColSprite.GetSpriteNode();
-
-            Debug.Assert(pSpriteNode != null);
-            SpriteBatchMan.Remove(pSpriteNode);
+            if (this.poColObj.pColSprite.HasSpriteNode())
+            {
+                SpriteNode pSpriteNode = this.poColObj.pColSprite.GetSpriteNode();
+                SpriteBatchMan.Remove(pSpriteNode);
+            }
 
             // 2) Don't Need to remove it from BoxSpriteMan
             // Since it is being recycled on the GhostMan

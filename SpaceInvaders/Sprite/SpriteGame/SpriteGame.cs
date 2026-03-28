@@ -175,6 +175,8 @@ namespace SE456
 			Debug.Assert(this.poColor != null);
 			Debug.Assert(this.poAzulSprite != null);
 
+			this.ClearSpriteNode();
+
 			this.x = 0.0f;
 			this.y = 0.0f;
 			this.sx = 1.0f;

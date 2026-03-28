@@ -53,6 +53,12 @@ namespace SE456
             ColPair.Collide(s, pGameObj);
         }
 
+        public override void VisitShip(Ship s)
+        {
+            GameObject pGameObj = (GameObject)IteratorForwardComposite.GetChild(this);
+            ColPair.Collide(s, pGameObj);
+        }
+
         public override void Update() //THIS HAD A UNION IN IT TO I NEED TO BRING BACK THIS METHOD???
         {
             //Debug.WriteLine("update: {0}", this);
@@ -117,10 +123,8 @@ namespace SE456
                 totalInvaders--;
             }
 
-            else if (totalInvaders == 0)
+            else if (totalInvaders == 1)
             {
-                level++;
-                //NewLevel();
                 ScoreManager.ResetScore();
             }
             else
@@ -129,42 +133,113 @@ namespace SE456
             }
         }
 
+        private void ClearAllColumns()
+        {
+            GameObject pColumn = (GameObject)IteratorForwardComposite.GetChild(this);
+            while (pColumn != null)
+            {
+                GameObject pNextCol = (GameObject)IteratorForwardComposite.GetSibling(pColumn);
+
+                GameObject pInv = (GameObject)IteratorForwardComposite.GetChild(pColumn);
+                while (pInv != null)
+                {
+                    GameObject pNextInv = (GameObject)IteratorForwardComposite.GetSibling(pInv);
+                    pInv.Remove();
+                    pInv = pNextInv;
+                }
+
+                pColumn.Remove();
+                pColumn = pNextCol;
+            }
+        }
+
+        public void RestoreInitialFormation()
+        {
+            InvaderFactory IF = new InvaderFactory(SpriteBatch.Name.Invaders, SpriteBatch.Name.Boxes);
+
+            totalInvaders = 55;
+            level = 1;
+            speed = 1.0f;
+            collided = false;
+            prevCollided = false;
+            delta = 1.0f;
+
+            ClearPendingVictory();
+
+            ClearAllColumns();
+
+            for (int i = 0; i < 11; i++)
+            {
+                float st = 86.0f;
+
+                InvaderColumn pNewColumn = (InvaderColumn)IF.Create(GameObject.Name.InvaderColumn);
+                this.Add(pNewColumn);
+
+                pNewColumn.Add(IF.Create(GameObject.Name.Octopus, st + i * 50.0f, 400.0f));
+                pNewColumn.Add(IF.Create(GameObject.Name.Octopus, st + i * 50.0f, 450.0f));
+                pNewColumn.Add(IF.Create(GameObject.Name.Crab, st + i * 50.0f, 500.0f));
+                pNewColumn.Add(IF.Create(GameObject.Name.Crab, st + i * 50.0f, 550.0f));
+                pNewColumn.Add(IF.Create(GameObject.Name.Squid, st + i * 50.0f, 600.0f));
+            }
+        }
+
+        /// <summary>Set when the third wave is fully cleared (level becomes 4). ScenePlay consumes via PopPendingVictory().</summary>
+        private static bool pendingVictory = false;
+
+        public static bool PopPendingVictory()
+        {
+            if (!pendingVictory)
+            {
+                return false;
+            }
+            pendingVictory = false;
+            return true;
+        }
+
+        private static void ClearPendingVictory()
+        {
+            pendingVictory = false;
+        }
+
         public static void NewLevel()
         {
-            if (level < 3)
+            level++;
+
+            InvaderFactory IF = new InvaderFactory(SpriteBatch.Name.Invaders, SpriteBatch.Name.Boxes);
+
+            InvaderGrid pGrid = (InvaderGrid)GameObjectNodeMan.Find(GameObject.Name.InvaderGrid);
+            if (pGrid == null)
             {
-                totalInvaders = 55;
-
-                InvaderFactory IF = new InvaderFactory(SpriteBatch.Name.Invaders, SpriteBatch.Name.Boxes);
-
-                InvaderGrid pGrid;
-                if (GameObjectNodeMan.Find(GameObject.Name.InvaderGrid) == null)
-                {
-                    pGrid = (InvaderGrid)IF.Create(GameObject.Name.InvaderGrid);
-                    GameObjectNodeMan.Attach(pGrid);
-                }
-                else
-                {
-                    pGrid = (InvaderGrid)GameObjectNodeMan.Find(GameObject.Name.InvaderGrid);
-                    GameObjectNodeMan.Attach(pGrid);
-                }
-
-                for (int i = 0; i < 11; i++)
-                {
-                    float st = 86.0f;
-
-                    InvaderColumn pColumn = (InvaderColumn)IF.Create(GameObject.Name.InvaderColumn);
-                    pGrid.Add(pColumn);
-
-                    pColumn.Add(IF.Create(GameObject.Name.Octopus, st + i * 50.0f, 350.0f));
-                    pColumn.Add(IF.Create(GameObject.Name.Octopus, st + i * 50.0f, 400.0f));
-                    pColumn.Add(IF.Create(GameObject.Name.Crab, st + i * 50.0f, 450.0f));
-                    pColumn.Add(IF.Create(GameObject.Name.Crab, st + i * 50.0f, 500.0f));
-                    pColumn.Add(IF.Create(GameObject.Name.Squid, st + i * 50.0f, 550.0f));
-                }
-
-                pGrid.SetSpeed(1.5f);
+                pGrid = (InvaderGrid)IF.Create(GameObject.Name.InvaderGrid);
+                GameObjectNodeMan.Attach(pGrid);
             }
+
+            pGrid.ClearAllColumns();
+
+            // Levels 2 and 3 spawn new waves; after clearing the third wave, level is 4 → victory (no new formation).
+            if (level > 3)
+            {
+                pendingVictory = true;
+                return;
+            }
+
+            totalInvaders = 55;
+
+            for (int i = 0; i < 11; i++)
+            {
+                float st = 86.0f;
+
+                InvaderColumn pColumn = (InvaderColumn)IF.Create(GameObject.Name.InvaderColumn);
+                pGrid.Add(pColumn);
+
+                pColumn.Add(IF.Create(GameObject.Name.Octopus, st + i * 50.0f, 350.0f));
+                pColumn.Add(IF.Create(GameObject.Name.Octopus, st + i * 50.0f, 400.0f));
+                pColumn.Add(IF.Create(GameObject.Name.Crab, st + i * 50.0f, 450.0f));
+                pColumn.Add(IF.Create(GameObject.Name.Crab, st + i * 50.0f, 500.0f));
+                pColumn.Add(IF.Create(GameObject.Name.Squid, st + i * 50.0f, 550.0f));
+            }
+
+            pGrid.SetSpeed(1.5f);
         }
 
         public static int GetTotalInvaders()

@@ -46,6 +46,13 @@ namespace SE456
             return pMan.poSubjectSpace;
         }
 
+
+        public static void AbsorbSpacePressed()
+        {
+            InputMan pMan = InputMan.privGetInstance();
+            pMan.privSpaceKeyPrev = true;
+        }
+
         public static void Update()
         {
             //Debug.WriteLine("InputMan.Update()");

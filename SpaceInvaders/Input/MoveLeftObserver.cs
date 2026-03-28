@@ -11,6 +11,11 @@ namespace SE456
         public override void Notify()
         {
             //Debug.WriteLine("Move Left");
+            if (ShipMan.getInstance() == null)
+            {
+                return;
+            }
+
             Ship pShip = ShipMan.GetShip();
             pShip.MoveLeft();
         }

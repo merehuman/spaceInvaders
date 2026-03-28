@@ -81,16 +81,52 @@ namespace SE456
         bool twoKeyPrev;
         bool threeKeyCurr;
         bool threeKeyPrev;
+        bool spaceMenuCurr;
+        bool spaceMenuPrev;
+        bool enterMenuCurr;
+        bool enterMenuPrev;
+        bool pKeyCurr;
+        bool pKeyPrev;
+
+        /// <summary>
+        /// Align menu edge state with the keyboard so leaving/entering scenes does not
+        /// treat a held key as a new press (e.g. Space still down from shooting).
+        /// </summary>
+        private void SyncMenuKeyStateFromKeyboard()
+        {
+            spaceMenuCurr = Azul.Keyboard.KeyPressed(Azul.AZUL_KEY.KEY_SPACE);
+            spaceMenuPrev = spaceMenuCurr;
+            enterMenuCurr = Azul.Keyboard.KeyPressed(Azul.AZUL_KEY.KEY_EXECUTE_BUTTON);
+            enterMenuPrev = enterMenuCurr;
+            pKeyCurr = Azul.Keyboard.KeyPressed(Azul.AZUL_KEY.KEY_P);
+            pKeyPrev = pKeyCurr;
+        }
+
+        private void TryGoToPlay(bool usedSpaceToStart)
+        {
+            if (pSceneContext.IsPlayScene())
+            {
+                return;
+            }
+
+            pSceneContext.SetState(SceneContext.Scene.Play);
+            if (usedSpaceToStart)
+            {
+                InputMan.AbsorbSpacePressed();
+            }
+            SyncMenuKeyStateFromKeyboard();
+        }
+
         public override void Update()
 		{
 
             GlobalTimer.Update(this.GetTime());
 
-
             oneKeyCurr = Azul.Keyboard.KeyPressed(Azul.AZUL_KEY.KEY_1);
             if (oneKeyCurr == true && oneKeyPrev == false)
             {
                 pSceneContext.SetState(SceneContext.Scene.Select);
+                SyncMenuKeyStateFromKeyboard();
             }
             oneKeyPrev = oneKeyCurr;
 
@@ -98,30 +134,63 @@ namespace SE456
             twoKeyCurr = Azul.Keyboard.KeyPressed(Azul.AZUL_KEY.KEY_2);
             if (twoKeyCurr == true && twoKeyPrev == false)
             {
-                pSceneContext.SetState(SceneContext.Scene.Play);
+                TryGoToPlay(false);
             }
             twoKeyPrev = twoKeyCurr;
 
             threeKeyCurr = Azul.Keyboard.KeyPressed(Azul.AZUL_KEY.KEY_3);
             if (threeKeyCurr == true && threeKeyPrev == false)
             {
+                SceneOver.SetNextEntryAsWin(false);
                 pSceneContext.SetState(SceneContext.Scene.Over);
+                SyncMenuKeyStateFromKeyboard();
             }
             threeKeyPrev = threeKeyCurr;
 
-
-            if (Azul.Keyboard.KeyPressed(Azul.AZUL_KEY.KEY_T) == true)
+            // start play from title / game over: re-check scene so KEY_2 same frame does not run menu keys as if still on menu
+            if (!pSceneContext.IsPlayScene())
             {
-                SpriteBatch pSB = SpriteBatchMan.Find(SpriteBatch.Name.Boxes);
-                Debug.Assert(pSB != null);
-                pSB.SetDrawEnable(false);
+                spaceMenuCurr = Azul.Keyboard.KeyPressed(Azul.AZUL_KEY.KEY_SPACE);
+                if (spaceMenuCurr == true && spaceMenuPrev == false)
+                {
+                    TryGoToPlay(true);
+                }
+                spaceMenuPrev = spaceMenuCurr;
+
+                enterMenuCurr = Azul.Keyboard.KeyPressed(Azul.AZUL_KEY.KEY_EXECUTE_BUTTON);
+                if (enterMenuCurr == true && enterMenuPrev == false)
+                {
+                    TryGoToPlay(false);
+                }
+                enterMenuPrev = enterMenuCurr;
+
+                pKeyCurr = Azul.Keyboard.KeyPressed(Azul.AZUL_KEY.KEY_P);
+                if (pKeyCurr == true && pKeyPrev == false)
+                {
+                    TryGoToPlay(false);
+                }
+                pKeyPrev = pKeyCurr;
             }
 
-            if (Azul.Keyboard.KeyPressed(Azul.AZUL_KEY.KEY_Y) == true)
+
+            // if (Azul.Keyboard.KeyPressed(Azul.AZUL_KEY.KEY_T) == true)
+            // {
+            //     SpriteBatch pSB = SpriteBatchMan.Find(SpriteBatch.Name.Boxes);
+            //     Debug.Assert(pSB != null);
+            //     pSB.SetDrawEnable(false);
+            // }
+
+            // if (Azul.Keyboard.KeyPressed(Azul.AZUL_KEY.KEY_Y) == true)
+            // {
+            //     SpriteBatch pSB = SpriteBatchMan.Find(SpriteBatch.Name.Boxes);
+            //     Debug.Assert(pSB != null);
+            //     pSB.SetDrawEnable(true);
+            // }
+
+            SpriteBatch pSB = SpriteBatchMan.Find(SpriteBatch.Name.Boxes);
+            if (pSB != null)
             {
-                SpriteBatch pSB = SpriteBatchMan.Find(SpriteBatch.Name.Boxes);
-                Debug.Assert(pSB != null);
-                pSB.SetDrawEnable(true);
+                pSB.SetDrawEnable(false);
             }
 
             // Update the scene

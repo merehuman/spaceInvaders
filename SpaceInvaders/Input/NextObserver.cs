@@ -11,7 +11,10 @@ namespace SE456
         public override void Notify()
         {
             Font pFont = FontMan.Find(Font.Name.TimedCharacter);
-            FontMan.Remove(pFont);
+            if (pFont != null)
+            {
+                FontMan.Remove(pFont);
+            }
         }
         override public void Dump()
         {

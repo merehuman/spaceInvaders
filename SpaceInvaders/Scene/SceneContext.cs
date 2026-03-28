@@ -42,6 +42,17 @@ namespace SE456
         {
             return this.pSceneState;
         }
+
+        public bool IsPlayScene()
+        {
+            return this.pSceneState == this.poScenePlay;
+        }
+
+        public ScenePlay GetPlayScene()
+        {
+            return this.poScenePlay;
+        }
+
         public void SetState(Scene eScene)
         {
             switch (eScene)

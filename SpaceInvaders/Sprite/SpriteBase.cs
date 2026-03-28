@@ -37,6 +37,16 @@ namespace SE456
             Debug.Assert(pSpriteBatchNode != null);
             this.pBackSpriteNode = pSpriteBatchNode;
         }
+
+        public void ClearSpriteNode()
+        {
+            this.pBackSpriteNode = null;
+        }
+
+        public bool HasSpriteNode()
+        {
+            return this.pBackSpriteNode != null;
+        }
   
         // Data: -------------------------------------------
 

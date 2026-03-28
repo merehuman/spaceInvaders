@@ -91,12 +91,22 @@ namespace SE456
 
             FontMan pMan = FontMan.psActiveFontMan;
 
-            // Remove it from the manager
-            SpriteNode pSpriteNode = pNode.poSpriteFont.GetSpriteNode();
-            Debug.Assert(pSpriteNode != null);
-            SpriteBatchMan.Remove(pSpriteNode);
+            if (pNode.poSpriteFont != null && pNode.poSpriteFont.HasSpriteNode())
+            {
+                SpriteNode pSpriteNode = pNode.poSpriteFont.GetSpriteNode();
+                SpriteBatchMan.Remove(pSpriteNode);
+            }
 
             pMan.baseRemove(pNode);
+        }
+
+        public static void RemoveAllTimedCharacterFonts()
+        {
+            Font p;
+            while ((p = Find(Font.Name.TimedCharacter)) != null)
+            {
+                Remove(p);
+            }
         }
 
         public static void Dump()

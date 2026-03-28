@@ -98,6 +98,8 @@ namespace SE456
             SpriteGameMan.Add(SpriteGame.Name.Octopus1, Image.Name.Octopus, 236.0f, 150.0f, 24.0f, 25.0f, new Azul.Color(0.0f, 1.0f, 0.0f, 1.0f));
 
             SpriteBatch pSB_Aliens = SpriteBatchMan.Add(SpriteBatch.Name.Aliens, 100);
+            SpriteBatchMan.Add(SpriteBatch.Name.Shields, 100);
+            SpriteBatchMan.Add(SpriteBatch.Name.Boxes, 100);
 
             //------------------------------------------------------
             // Sounds
@@ -110,6 +112,8 @@ namespace SE456
 
         private void LoadOnEntry()
         {
+            FontMan.RemoveAllTimedCharacterFonts();
+
             // play a sound file
             sndEngine.SoundVolume = 0.2f;
             //sndEngine.Play2D(theme, false, false, false);
@@ -165,7 +169,9 @@ namespace SE456
 
             }
 
-            TimedCharacterFactory.Install("P  L  A  Y", 3.0f, 0.30f, 306, 550, 0.9f, 0.9f, 0.9f);
+            DetachDemoInvaderSprites();
+
+            TimedCharacterFactory.Install("P  L  A  Y", 0.5f, 0.30f, 306, 550, 0.9f, 0.9f, 0.9f);
             TimedCharacterFactory.Install("S  P  A  C  E         I  N  V  A  D  E  R  S", 5.0f, 0.10f, 193, 475, 0.9f, 0.9f, 0.9f);
             TimedCharacterFactory.Install("* S  C  O  R  E    A  D  V  A  N  C  E    T  A  B  L  E *", 6.0f, 0.10f, 140, 350, 0.9f, 0.9f, 0.9f);
             TimedCharacterFactory.Install("=  ?   M Y S T E R Y", 8.0f, 0.10f, 265, 300, 0.9f, 0.9f, 0.9f);
@@ -184,6 +190,24 @@ namespace SE456
 
             TimedSpriteCmd pTimedCmd4 = new TimedSpriteCmd(SpriteGame.Name.Octopus1);
             TimerEventMan.Add(TimerEvent.Name.TimedSprite, pTimedCmd4, 15.5f);
+        }
+
+        private static void DetachDemoInvaderSprites()
+        {
+            DetachDemoSpriteIfAttached(SpriteGame.Name.UFO1);
+            DetachDemoSpriteIfAttached(SpriteGame.Name.Squid1);
+            DetachDemoSpriteIfAttached(SpriteGame.Name.Crab1);
+            DetachDemoSpriteIfAttached(SpriteGame.Name.Octopus1);
+        }
+
+        private static void DetachDemoSpriteIfAttached(SpriteGame.Name name)
+        {
+            SpriteGame sprite = SpriteGameMan.Find(name);
+            if (sprite == null || !sprite.HasSpriteNode())
+            {
+                return;
+            }
+            SpriteBatchMan.Remove(sprite.GetSpriteNode());
         }
 
         public override void Update(float systemTime)
@@ -224,6 +248,8 @@ namespace SE456
 
         public override void Entering()
         {
+            Simulation.SetState(Simulation.State.Realtime);
+
             SpriteBatchMan.SetActive(this.poSpriteBatchMan);
             FontMan.SetActive(this.poFontMan);
 

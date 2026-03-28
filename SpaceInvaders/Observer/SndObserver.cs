@@ -17,12 +17,19 @@ namespace SE456
             Debug.Assert(_pSndSrc != null);
             this.pSndSrc = _pSndSrc;
         }
+
+        public void PlaySound()
+        {
+            Debug.Assert(pSndEngine != null);
+            Debug.Assert(pSndSrc != null);
+            pSndEngine.SoundVolume = 0.2f;
+            pSndEngine.Play2D(pSndSrc, false, false, false);
+        }
+
         public override void Notify()
         {
             //Debug.WriteLine(" Snd_Observer: {0} {1}", this.pSubject.pObjA, this.pSubject.pObjB);
-
-            pSndEngine.SoundVolume = 0.2f;
-            pSndEngine.Play2D(pSndSrc, false, false, false);
+            PlaySound();
         }
 
 

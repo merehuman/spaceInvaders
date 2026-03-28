@@ -49,6 +49,12 @@ namespace SE456
             pColPair.NotifyListeners();
         }
 
+        public override void VisitGroup(InvaderGrid a)
+        {
+            // InvaderGrid.Accept calls visitor.VisitGroup(this). Alien_Wall walks wall siblings
+            // (WallTop before WallBottom). GridObserver has no Top case — do not notify.
+        }
+
         // Data: ---------------
 
 

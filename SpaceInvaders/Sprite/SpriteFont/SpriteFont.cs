@@ -158,6 +158,7 @@ namespace SE456
 
         override public void Wash()
         {
+            this.ClearSpriteNode();
             this.privClear();
         }
 

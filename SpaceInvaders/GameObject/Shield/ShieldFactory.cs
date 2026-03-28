@@ -34,17 +34,37 @@ namespace SE456
         ~ShieldFactory()
         {
         }
+
+        private static bool privGhostMatchesShieldType(ShieldCategory.Type type, GameObject ghost)
+        {
+            switch (type)
+            {
+                case ShieldCategory.Type.Grid:
+                    return ghost is ShieldGrid;
+                case ShieldCategory.Type.Column:
+                    return ghost is ShieldColumn;
+                case ShieldCategory.Type.Brick:
+                case ShieldCategory.Type.LeftTop1:
+                case ShieldCategory.Type.LeftTop0:
+                case ShieldCategory.Type.LeftBottom:
+                case ShieldCategory.Type.RightTop1:
+                case ShieldCategory.Type.RightTop0:
+                case ShieldCategory.Type.RightBottom:
+                    return ghost is ShieldBrick;
+                default:
+                    return false;
+            }
+        }
+
         private GameObject privCreate(ShieldCategory.Type type, GameObject.Name gameName, float posX = 0.0f, float posY = 0.0f)
         {
             GameObject pShield = null;
 
             GameObjectNode pGameObjNode = GhostMan.Find(gameName);
-            if (pGameObjNode != null)
+            if (pGameObjNode != null && privGhostMatchesShieldType(type, pGameObjNode.pGameObj))
             {
                 pShield = pGameObjNode.pGameObj;
                 GhostMan.Remove(pGameObjNode);
-
-                //GhostMan.Dump();
 
                 switch (type)
                 {
@@ -71,7 +91,6 @@ namespace SE456
                         break;
 
                     default:
-                        // something is wrong
                         Debug.Assert(false);
                         break;
                 }
@@ -137,6 +156,30 @@ namespace SE456
             return pShield;
         }
 
+        private static void RemoveShieldSubtree(GameObject gameObj)
+        {
+            if (gameObj is Composite composite)
+            {
+                GameObject pChild = (GameObject)IteratorForwardComposite.GetChild(composite);
+                while (pChild != null)
+                {
+                    GameObject pNext = (GameObject)IteratorForwardComposite.GetSibling(pChild);
+                    RemoveShieldSubtree(pChild);
+                    pChild = pNext;
+                }
+            }
+            gameObj.Remove();
+        }
+
+        private static void ClearShieldRootChildren(ShieldRoot root)
+        {
+            while (root.GetNumChildren() > 0)
+            {
+                GameObject pChild = (GameObject)IteratorForwardComposite.GetChild(root);
+                RemoveShieldSubtree(pChild);
+            }
+        }
+
         public static GameObject CreateShields(float posX = 0.0f, float posY = 0.0f)
         {
             ShieldFactory pFactory = ShieldFactory.privInstance();
@@ -147,6 +190,10 @@ namespace SE456
             {
                 pShieldRoot = new ShieldRoot(GameObject.Name.ShieldRoot, SpriteGame.Name.NullObject, 0.0f, 0.0f);
                 GameObjectNodeMan.Attach(pShieldRoot);
+            }
+            else
+            {
+                ClearShieldRootChildren(pShieldRoot);
             }
             pFactory.privSet(SpriteBatch.Name.Shields, SpriteBatch.Name.Boxes, pShieldRoot);
 

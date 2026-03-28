@@ -10,43 +10,45 @@ namespace SE456
     {
         public TimedSpriteCmd(SpriteGame.Name name)
         {
-            this.pSB_Invaders = SpriteBatchMan.Find(SpriteBatch.Name.Aliens);
-            Debug.Assert(this.pSB_Invaders != null);
-
             this.name = name;
         }
 
         override public void Execute(float deltaTime)
         {
-            GameObject pGameObj = null;
+            SpriteBatch pSB_Aliens = SpriteBatchMan.Find(SpriteBatch.Name.Aliens);
+            Debug.Assert(pSB_Aliens != null);
+
+            SpriteGame pSprite = null;
             switch (name)
             {
                 case SpriteGame.Name.Crab1:
-                    pSB_Invaders.Attach(SpriteGameMan.Find(SpriteGame.Name.Crab1));
+                    pSprite = SpriteGameMan.Find(SpriteGame.Name.Crab1);
                     break;
 
                 case SpriteGame.Name.Octopus1:
-                    pSB_Invaders.Attach(SpriteGameMan.Find(SpriteGame.Name.Octopus1));
+                    pSprite = SpriteGameMan.Find(SpriteGame.Name.Octopus1);
                     break;
 
                 case SpriteGame.Name.Squid1:
-                    pSB_Invaders.Attach(SpriteGameMan.Find(SpriteGame.Name.Squid1));
+                    pSprite = SpriteGameMan.Find(SpriteGame.Name.Squid1);
                     break;
 
                 case SpriteGame.Name.UFO1:
-                    pSB_Invaders.Attach(SpriteGameMan.Find(SpriteGame.Name.UFO1));
+                    pSprite = SpriteGameMan.Find(SpriteGame.Name.UFO1);
                     break;
 
                 default:
-                    // something is wrong
                     Debug.Assert(false);
                     break;
             }
 
+            Debug.Assert(pSprite != null);
+            if (!pSprite.HasSpriteNode())
+            {
+                pSB_Aliens.Attach(pSprite);
+            }
         }
 
-
-        SpriteBatch pSB_Invaders;
         SpriteGame.Name name;
     }
 }

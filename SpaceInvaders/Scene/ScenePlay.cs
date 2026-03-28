@@ -131,8 +131,55 @@ namespace SE456
             }
         }
 
+        private static void AttachReserveIfNeeded(SpriteBatch reserveShips, SpriteGame.Name name)
+        {
+            SpriteGame s = SpriteGameMan.Find(name);
+            if (s != null && !s.HasSpriteNode())
+            {
+                reserveShips.Attach(s);
+            }
+        }
+
+        private static void EnsureReserveShipSpritesExist()
+        {
+            Azul.Color green = new Azul.Color(0.0f, 1.0f, 0.0f, 1.0f);
+            if (SpriteGameMan.Find(SpriteGame.Name.ReserveShip1) == null)
+            {
+                SpriteGameMan.Add(SpriteGame.Name.ReserveShip1, Image.Name.Ship, 88, 33, 39, 24, green);
+            }
+            if (SpriteGameMan.Find(SpriteGame.Name.ReserveShip2) == null)
+            {
+                SpriteGameMan.Add(SpriteGame.Name.ReserveShip2, Image.Name.Ship, 133, 33, 39, 24, green);
+            }
+            if (SpriteGameMan.Find(SpriteGame.Name.ReserveShip3) == null)
+            {
+                SpriteGameMan.Add(SpriteGame.Name.ReserveShip3, Image.Name.Ship, 178, 33, 39, 24, green);
+            }
+        }
+
+        private static void PurgeExplosionChildren()
+        {
+            GameObject pRoot = GameObjectNodeMan.Find(GameObject.Name.ExplosionRoot);
+            ExplosionRoot root = pRoot as ExplosionRoot;
+            if (root == null)
+            {
+                return;
+            }
+            while (root.GetNumChildren() > 0)
+            {
+                Component head = root.GetHead();
+                Explosion ex = head as Explosion;
+                Debug.Assert(ex != null);
+                ex.Remove();
+            }
+        }
+
         private void LoadOnEntry()
         {
+            PurgeExplosionChildren();
+
+            ShipRemoveObserver.SetExplosionSound(new SndObserver(sndEngine, explosion));
+
             // play a sound file
             sndEngine.SoundVolume = 0.0f;
             sndEngine.Play2D(sndVader0, false, false, false);
@@ -147,14 +194,31 @@ namespace SE456
                 pSB_Text = SpriteBatchMan.Find(SpriteBatch.Name.Texts);
             }
 
-            SpriteBatch pSB_Invaders = SpriteBatchMan.Add(SpriteBatch.Name.Invaders, 100);
-            SpriteBatch pSB_Boxes = SpriteBatchMan.Add(SpriteBatch.Name.Boxes, 100);
-            SpriteBatch pSB_Shields = SpriteBatchMan.Add(SpriteBatch.Name.Shields, 100);
-            SpriteBatch reserveShips = SpriteBatchMan.Add(SpriteBatch.Name.ReserveShips, 100);
+            SpriteBatch pSB_Invaders = SpriteBatchMan.Find(SpriteBatch.Name.Invaders);
+            if (pSB_Invaders == null)
+            {
+                pSB_Invaders = SpriteBatchMan.Add(SpriteBatch.Name.Invaders, 100);
+            }
+            SpriteBatch pSB_Boxes = SpriteBatchMan.Find(SpriteBatch.Name.Boxes);
+            if (pSB_Boxes == null)
+            {
+                pSB_Boxes = SpriteBatchMan.Add(SpriteBatch.Name.Boxes, 100);
+            }
+            SpriteBatch pSB_Shields = SpriteBatchMan.Find(SpriteBatch.Name.Shields);
+            if (pSB_Shields == null)
+            {
+                pSB_Shields = SpriteBatchMan.Add(SpriteBatch.Name.Shields, 100);
+            }
+            SpriteBatch reserveShips = SpriteBatchMan.Find(SpriteBatch.Name.ReserveShips);
+            if (reserveShips == null)
+            {
+                reserveShips = SpriteBatchMan.Add(SpriteBatch.Name.ReserveShips, 100);
+            }
 
             //------------------------------------------------------
             // Create Fonts
             //------------------------------------------------------
+            if (FontMan.Find(Font.Name.Score1) == null)
             {
                 {
                     //TOP
@@ -229,6 +293,7 @@ namespace SE456
             else
             {
                 pGrid = (InvaderGrid)GameObjectNodeMan.Find(GameObject.Name.InvaderGrid);
+                pGrid.RestoreInitialFormation();
             }
             //InvaderGrid pGrid = (InvaderGrid)IF.Create(GameObject.Name.InvaderGrid);
             //GameObjectNodeMan.Attach(pGrid);
@@ -251,9 +316,13 @@ namespace SE456
             // Create Reserve Ships
             //------------------------------------------------------
             {
-                reserveShips.Attach(SpriteGameMan.Find(SpriteGame.Name.ReserveShip1));
-                reserveShips.Attach(SpriteGameMan.Find(SpriteGame.Name.ReserveShip2));
-                reserveShips.Attach(SpriteGameMan.Find(SpriteGame.Name.ReserveShip3));
+                // Lives lost during play call SpriteGameMan.Remove on these sprites; they are no longer
+                // in the active manager. Find() returns null on restart — Attach(null) asserts in SpriteNode.Set.
+                EnsureReserveShipSpritesExist();
+
+                AttachReserveIfNeeded(reserveShips, SpriteGame.Name.ReserveShip1);
+                AttachReserveIfNeeded(reserveShips, SpriteGame.Name.ReserveShip2);
+                AttachReserveIfNeeded(reserveShips, SpriteGame.Name.ReserveShip3);
             }
 
             //------------------------------------------------------
@@ -405,8 +474,16 @@ namespace SE456
             //------------------------------------------------------
             // Create Ships
             //------------------------------------------------------
-            ShipRoot pShipRoot = new ShipRoot(GameObject.Name.ShipRoot, SpriteGame.Name.NullObject, 0.0f, 0.0f);
-            GameObjectNodeMan.Attach(pShipRoot);
+            ShipRoot pShipRoot;
+            if (GameObjectNodeMan.Find(GameObject.Name.ShipRoot) == null)
+            {
+                pShipRoot = new ShipRoot(GameObject.Name.ShipRoot, SpriteGame.Name.NullObject, 0.0f, 0.0f);
+                GameObjectNodeMan.Attach(pShipRoot);
+            }
+            else
+            {
+                pShipRoot = (ShipRoot)GameObjectNodeMan.Find(GameObject.Name.ShipRoot);
+            }
 
             if (ShipMan.getInstance() == null)
             {
@@ -419,20 +496,9 @@ namespace SE456
 
 
             //------------------------------------------------------
-            // Create Shields
+            // Create Shields (rebuild full shields every entry; keeps same ShieldRoot for ColPair refs)
             //------------------------------------------------------
-            //GameObject pShieldRoot = ShieldFactory.CreateShields(75.0f, 150.0f);
-            GameObject pShieldRoot;
-            if (GameObjectNodeMan.Find(GameObject.Name.ShieldRoot) == null)
-            {
-                pShieldRoot = ShieldFactory.CreateShields(75.0f, 150.0f);
-                GameObjectNodeMan.Attach(pShieldRoot);
-            }
-            else
-            {
-                pShieldRoot = GameObjectNodeMan.Find(GameObject.Name.ShieldRoot);
-
-            }
+            GameObject pShieldRoot = ShieldFactory.CreateShields(75.0f, 150.0f);
 
             //------------------------------------------------------
             // Create Animations/commands
@@ -527,6 +593,7 @@ namespace SE456
             //------------------------------------------------------
             // Create Collision Pairs
             //------------------------------------------------------
+            if (ColPairMan.Find(ColPair.Name.Alien_Wall) == null)
             {
                 // associate in a collision pair
                 ColPair pColPair = ColPairMan.Add(ColPair.Name.Alien_Wall, pGrid, pWallGroup);
@@ -581,7 +648,6 @@ namespace SE456
                 pColPair.Attach(new RemoveBombObserver());
                 pColPair.Attach(new ShipRemoveObserver());
                 pColPair.Attach(new ShipReadyObserver());
-                pColPair.Attach(new SndObserver(sndEngine, explosion)); // explode??
 
                 // Bumper vs Ship
                 pColPair = ColPairMan.Add(ColPair.Name.Bumper_Ship, pBumperRoot, pShipRoot);
@@ -594,12 +660,17 @@ namespace SE456
                 pColPair.Attach(new ShipReadyObserver());
                 pColPair.Attach(new SndObserver(sndEngine, invaderKilled));
 
-                //Alien vs Ship
+                //Alien vs Ship (explosion sound once per life lost — ShipRemoveObserver; not SndObserver — overlap fires every frame)
                 pColPair = ColPairMan.Add(ColPair.Name.Alien_Ship, pGrid, pShipRoot);
                 pColPair.Attach(new ShipRemoveObserver());
                 pColPair.Attach(new ShipReadyObserver());
-                pColPair.Attach(new SndObserver(sndEngine, explosion));
 
+            }
+
+            Font pReserveHud = FontMan.Find(Font.Name.Reserve);
+            if (pReserveHud != null)
+            {
+                pReserveHud.UpdateMessage("3");
             }
         }
 
@@ -607,11 +678,22 @@ namespace SE456
 
         public override void Update(float systemTime)
         {
+            ShipRemoveObserver.TickInvulnerability();
+
             if (ShipRemoveObserver.count == 0)
             {
-                // Switch to Game Over Scene
+                SceneOver.SetNextEntryAsWin(false);
                 SceneContext pSceneContext = SceneContext.GetInstance();
                 pSceneContext.SetState(SceneContext.Scene.Over);
+                // SceneOver sets SpriteBatchMan active — do not run timers/collision below or Find(Invaders) is null and ActivateSprite asserts.
+                return;
+            }
+            if (InvaderGrid.PopPendingVictory())
+            {
+                SceneOver.SetNextEntryAsWin(true);
+                SceneContext pSceneContext = SceneContext.GetInstance();
+                pSceneContext.SetState(SceneContext.Scene.Over);
+                return;
             }
             // Single Step, Free running...
             Simulation.Update(systemTime);
@@ -643,6 +725,13 @@ namespace SE456
                 DelayedObjectMan.Process();
             }
 
+            if (ShipRemoveObserver.count == 0)
+            {
+                SceneOver.SetNextEntryAsWin(false);
+                SceneContext pSceneContext = SceneContext.GetInstance();
+                pSceneContext.SetState(SceneContext.Scene.Over);
+                return;
+            }
 
         }
         public override void Draw()
@@ -652,6 +741,8 @@ namespace SE456
         }
         public override void Entering()
         {
+            Simulation.SetState(Simulation.State.Realtime);
+
             // update SpriteBatchMan()
             SpriteBatchMan.SetActive(this.poSpriteBatchMan);
             FontMan.SetActive(this.poFontMan);
@@ -666,11 +757,31 @@ namespace SE456
 
             TimerEventMan.ClearAll();
 
+            ShipRemoveObserver.ResetForNewGame();
+
             this.LoadOnEntry();
 
         }
+
+        public void FlushDelayedCollisionObservers()
+        {
+            SpriteBatchMan.SetActive(this.poSpriteBatchMan);
+            if (SpriteBatchMan.Find(SpriteBatch.Name.Invaders) == null)
+            {
+                return;
+            }
+            DelayedObjectMan.ProcessUntilEmpty();
+        }
+
         public override void Leaving()
         {
+            // RemoveInvaderObserver and other delayed observers call ActivateSprite / InvaderFactory
+            // using SpriteBatchMan.Find. Flush them while Play's batches (Invaders, Boxes) still exist;
+            // SceneOver/SceneSelect Update used to Process() with the wrong active SpriteBatchMan.
+            FlushDelayedCollisionObservers();
+
+            PurgeExplosionChildren();
+
             // Need a better way to do this
             this.TimeAtPause = GlobalTimer.GetTime();
 

@@ -37,6 +37,15 @@ namespace SE456
             pColPair.NotifyListeners();
         }
 
+        public override void VisitGroup(InvaderGrid a)
+        {
+            ColPair pColPair = ColPairMan.GetActiveColPair();
+            Debug.Assert(pColPair != null);
+
+            pColPair.SetCollision(a, this);
+            pColPair.NotifyListeners();
+        }
+
         public override void Update()
         {
             // Go to first child

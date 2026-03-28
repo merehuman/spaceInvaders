@@ -70,6 +70,7 @@ namespace SE456
                 Explosion explosion = new Explosion(GameObject.Name.Explosion, SpriteGame.Name.ExplosionInvader, pA.x, pA.y);
                 explosion.ActivateSprite(SpriteBatchMan.Find(SpriteBatch.Name.Invaders));
                 explosion.ActivateCollisionSprite(SpriteBatchMan.Find(SpriteBatch.Name.Boxes));
+                explosion.Update();
                 explosionRoot.Add(explosion);
                 TimerEventMan.Add(TimerEvent.Name.Explosion, new ExplosionAnimCmd(explosion), 0.1f);
                 
