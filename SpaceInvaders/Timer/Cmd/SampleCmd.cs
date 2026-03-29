@@ -16,6 +16,11 @@ namespace SE456
 
         public override void Execute(float deltaTime)
         {
+            if (Ship == null || Ship.pSpriteProxy == null || Ship.pSpriteProxy.pRealSprite == null || Ship.pSpriteProxy.pRealSprite.pImage == null)
+            {
+                return;
+            }
+
             if (Ship.pSpriteProxy.pRealSprite.pImage.mName == Image.Name.Ship)
             {
                 Ship.pSpriteProxy.pRealSprite.SwapImage(ImageMan.Find(Image.Name.ExplosionShip));

@@ -224,6 +224,13 @@ namespace SE456
             // ColObject creates a SpriteBox; it must be in a batch so GameObject.Remove can detach it on restart.
             pShip.ActivateCollisionSprite(pSB_Boxes);
 
+            // SpriteGame.Name.Ship is a single shared instance; SampleCmd swaps its texture during hit animation.
+            // Reset to the hull image so new lives / restarts never show a stuck explosion frame.
+            SpriteGame sgShip = SpriteGameMan.Find(SpriteGame.Name.Ship);
+            Image imgShip = ImageMan.Find(Image.Name.Ship);
+            Debug.Assert(sgShip != null && imgShip != null);
+            sgShip.SwapImage(imgShip);
+
             // Attach the missile to the missile root
             GameObject pShipRoot = GameObjectNodeMan.Find(GameObject.Name.ShipRoot);
             Debug.Assert(pShipRoot != null);

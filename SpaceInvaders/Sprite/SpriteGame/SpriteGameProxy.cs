@@ -79,6 +79,13 @@ namespace SE456
 
             this.pRealSprite = null;
 
+            // Proxy can be recycled in SpriteGameProxyMan while a SpriteNode still points here
+            // (orphan node after double-Attach). Clear so recycled proxy is not tied to stale batch.
+            if (this.HasSpriteNode())
+            {
+                this.ClearSpriteNode();
+            }
+
             base.baseWash();
         }
         public override void Render()

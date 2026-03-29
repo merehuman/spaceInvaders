@@ -26,6 +26,9 @@ namespace SE456
             RemoveBombObserver,
             RemoveInvaderObserver,
             RemoveUFOObserver,
+            WallRoofExplosionObserver,
+            WallBottomExplosionObserver,
+            DestroyShieldObserver,
 
             Uninitialized
         }

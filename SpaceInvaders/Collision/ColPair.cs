@@ -13,6 +13,7 @@ namespace SE456
             Bird_Missile,
             Alien_Missile,
             Alien_Wall,
+            Alien_Shield,
             Missile_Wall,
             Bomb_Wall,
             Bomb_Shield,

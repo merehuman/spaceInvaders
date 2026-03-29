@@ -48,6 +48,12 @@ namespace SE456
 
         private static int invulnFramesRemaining = 0;
 
+        /// <summary>Queued during Notify; applied after ColPairMan.Process so multiple Alien_Ship hits in one pass all see invuln==0 before it is applied. Bomb_Ship never queues this (see QueuePostCollisionInvulnerability).</summary>
+        private static int pendingInvulnAfterCollisions = 0;
+
+        /// <summary>At most one Alien_Ship life loss per collision pass (invuln is deferred like bombs, so this replaces same-frame invuln blocking).</summary>
+        private static bool alienShipHitThisCollisionPass = false;
+
         private const int InvulnFramesAfterHit = 90;
 
         public static void TickInvulnerability()
@@ -58,10 +64,39 @@ namespace SE456
             }
         }
 
+        /// <summary>Call once immediately before ColPairMan.Process().</summary>
+        public static void BeginCollisionProcessing()
+        {
+            alienShipHitThisCollisionPass = false;
+        }
+
+        /// <summary>Call once immediately after ColPairMan.Process().</summary>
+        public static void ApplyPendingInvulnerabilityAfterCollisions()
+        {
+            if (pendingInvulnAfterCollisions > 0)
+            {
+                invulnFramesRemaining = pendingInvulnAfterCollisions;
+                pendingInvulnAfterCollisions = 0;
+            }
+        }
+
+        /// <summary>Long post-hit invuln is for Alien_Ship overlap (avoids draining multiple lives per frame). Bomb hits must not set it or consecutive bombs are ignored for ~90 frames.</summary>
+        private static void QueuePostCollisionInvulnerability()
+        {
+            ColPair active = ColPairMan.GetActiveColPair();
+            if (active != null && active.name == ColPair.Name.Bomb_Ship)
+            {
+                return;
+            }
+            pendingInvulnAfterCollisions = InvulnFramesAfterHit;
+        }
+
         public static void ResetForNewGame()
         {
             count = 3;
             invulnFramesRemaining = 0;
+            pendingInvulnAfterCollisions = 0;
+            alienShipHitThisCollisionPass = false;
         }
 
         private static void QueueShipExplosionTimers(Ship ship)
@@ -78,6 +113,17 @@ namespace SE456
                 return;
             }
 
+            if (count <= 0)
+            {
+                return;
+            }
+
+            ColPair activePair = ColPairMan.GetActiveColPair();
+            if (activePair != null && activePair.name == ColPair.Name.Alien_Ship && alienShipHitThisCollisionPass)
+            {
+                return;
+            }
+
             Ship ship = ShipMan.GetShip();
 
             if (count == 3)
@@ -85,7 +131,11 @@ namespace SE456
                 if (RemoveReserveShipSprite(SpriteGame.Name.ReserveShip3))
                 {
                     count--;
-                    invulnFramesRemaining = InvulnFramesAfterHit;
+                    QueuePostCollisionInvulnerability();
+                    if (activePair != null && activePair.name == ColPair.Name.Alien_Ship)
+                    {
+                        alienShipHitThisCollisionPass = true;
+                    }
                     QueueShipExplosionTimers(ship);
                     Font font = FontMan.Find(Font.Name.Reserve);
                     if (font != null)
@@ -99,7 +149,11 @@ namespace SE456
                 if (RemoveReserveShipSprite(SpriteGame.Name.ReserveShip2))
                 {
                     count--;
-                    invulnFramesRemaining = InvulnFramesAfterHit;
+                    QueuePostCollisionInvulnerability();
+                    if (activePair != null && activePair.name == ColPair.Name.Alien_Ship)
+                    {
+                        alienShipHitThisCollisionPass = true;
+                    }
                     PlayExplosionOnce();
                     QueueShipExplosionTimers(ship);
                     Font font = FontMan.Find(Font.Name.Reserve);
@@ -114,9 +168,13 @@ namespace SE456
                 if (RemoveReserveShipSprite(SpriteGame.Name.ReserveShip1))
                 {
                     count--;
-                    invulnFramesRemaining = InvulnFramesAfterHit;
+                    QueuePostCollisionInvulnerability();
+                    if (activePair != null && activePair.name == ColPair.Name.Alien_Ship)
+                    {
+                        alienShipHitThisCollisionPass = true;
+                    }
                     PlayExplosionOnce();
-                    QueueShipExplosionTimers(ship);
+                    // Game over — do not queue SampleCmd timers; they can fire after scene change and stall or leave the shared Ship sprite wrong.
                     Font font = FontMan.Find(Font.Name.Reserve);
                     if (font != null)
                     {

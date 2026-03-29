@@ -230,7 +230,9 @@ namespace SE456
                 sndEngine.Update();
 
                 // Do the collision checks
+                ShipRemoveObserver.BeginCollisionProcessing();
                 ColPairMan.Process();
+                ShipRemoveObserver.ApplyPendingInvulnerabilityAfterCollisions();
 
                 // walk through all objects and push to flyweight
                 GameObjectNodeMan.Update();

@@ -183,7 +183,14 @@ namespace SE456
             this.y = this.poColObj.poColRect.y;
   
             //  Debug.WriteLine("x:{0} y:{1} w:{2} h:{3}", ColTotal.x, ColTotal.y, ColTotal.width, ColTotal.height);
-        }
+            }
+            else if (this.type == Component.Container.COMPOSITE)
+            {
+                // No children: do not keep the previous union (collision matches reality; stale union was fixed earlier).
+                ColTotal.Set(0.0f, 0.0f, 0.0f, 0.0f);
+                this.x = 0.0f;
+                this.y = 0.0f;
+            }
         }
 
         public virtual void Update()
@@ -202,12 +209,26 @@ namespace SE456
         {
             Debug.Assert(pSpriteBatch != null);
             Debug.Assert(this.poColObj != null);
+            privDetachSpriteBaseIfBatched(this.poColObj.pColSprite);
             pSpriteBatch.Attach(this.poColObj.pColSprite);
         }
         public void ActivateSprite(SpriteBatch pSpriteBatch)
         {
             Debug.Assert(pSpriteBatch != null);
+            privDetachSpriteBaseIfBatched(this.pSpriteProxy);
             pSpriteBatch.Attach(this.pSpriteProxy);
+        }
+
+        /// <summary>
+        /// Second Attach on the same SpriteBase leaves an orphan SpriteNode in the batch (back-pointer is overwritten).
+        /// Shield bricks are recreated from the ghost pool and ActivateSprite runs again — leaked nodes draw forever.
+        /// </summary>
+        private static void privDetachSpriteBaseIfBatched(SpriteBase pSprite)
+        {
+            if (pSprite != null && pSprite.HasSpriteNode())
+            {
+                SpriteBatchMan.Remove(pSprite.GetSpriteNode());
+            }
         }
         public void SetCollisionColor(float red, float green, float blue)
         {

@@ -182,6 +182,7 @@
     <Compile Include="Manager\SLink\SLinkIterator.cs" />
     <Compile Include="Manager\SLink\SLinkMan.cs" />
     <Compile Include="Observer\BombObserver.cs" />
+    <Compile Include="Observer\DestroyShieldObserver.cs" />
     <Compile Include="Observer\GridObserver.cs" />
     <Compile Include="Observer\RemoveBombObserver.cs" />
     <Compile Include="Observer\RemoveBrickObserver.cs" />
@@ -193,6 +194,8 @@
     <Compile Include="Observer\ShipRemoveMissileObserver.cs" />
     <Compile Include="Observer\ShipRemoveObserver.cs" />
     <Compile Include="Observer\SndObserver.cs" />
+    <Compile Include="Observer\WallRoofExplosionObserver.cs" />
+    <Compile Include="Observer\WallBottomExplosionObserver.cs" />
     <Compile Include="Scene\SceneContext.cs" />
     <Compile Include="Scene\SceneOver.cs" />
     <Compile Include="Scene\ScenePlay.cs" />

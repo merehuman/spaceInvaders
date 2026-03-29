@@ -49,6 +49,13 @@ namespace SE456
             pColPair.NotifyListeners();
         }
 
+        public override void VisitBomb(Bomb b)
+        {
+            ColPair pColPair = ColPairMan.GetActiveColPair();
+            pColPair.SetCollision(b, this);
+            pColPair.NotifyListeners();
+        }
+
         public override void VisitGroup(InvaderGrid a)
         {
             // InvaderGrid.Accept calls visitor.VisitGroup(this). Alien_Wall walks wall siblings

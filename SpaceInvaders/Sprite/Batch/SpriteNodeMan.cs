@@ -58,7 +58,10 @@ namespace SE456
 				// Downcast (its OK - homogeneous list)
 				// Assumes someone before here called update() on each sprite
 				SpriteNode pNode = (SpriteNode)pIt.Current();
-                pNode.pSpriteBase.Render();
+                if (pNode.pSpriteBase != null)
+                {
+                    pNode.pSpriteBase.Render();
+                }
 			}
 		}
 		public void Remove(SpriteNode _pSpriteNode)

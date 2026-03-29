@@ -57,6 +57,14 @@ namespace SE456
             // Missile vs ShieldRoot
             ColPair.Collide(b, (GameObject)IteratorForwardComposite.GetChild(this));
         }
+
+        public override void VisitGroup(InvaderGrid a)
+        {
+            // Alien_Shield: same delegation as WallGroup — InvaderGrid vs ShieldRoot bbox, then test each ShieldGrid
+            GameObject pGameObj = (GameObject)IteratorForwardComposite.GetChild(this);
+            ColPair.Collide(a, pGameObj);
+        }
+
         public override void Update()
         {
             // Go to first child

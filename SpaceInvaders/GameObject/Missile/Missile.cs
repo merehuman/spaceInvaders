@@ -17,6 +17,7 @@ namespace SE456
             this.delta = 20.0f;
 
             this.poColObj.pColSprite.SetColor(1, 1, 0);
+            this.ApplyCollisionSize();
         }
         public void Resurrect(float posX, float posY)
         {
@@ -26,14 +27,12 @@ namespace SE456
 
             base.Resurrect();
             this.poColObj.pColSprite.SetColor(1, 1, 0);
-
+            this.ApplyCollisionSize();
         }
         public override void Update()
         {
             base.Update();
             this.y += delta;
-
-            base.BaseUpdateBoundingBox(this);
         }
 
         ~Missile()
@@ -79,6 +78,15 @@ namespace SE456
             this.y = yPos;
         }
 
+        private void ApplyCollisionSize()
+        {
+            ColRect r = this.poColObj.poColRect;
+            r.Set(r.x, r.y, CollisionWidth, CollisionHeight);
+            this.poColObj.pColSprite.SetRect(r.x, r.y, r.width, r.height);
+        }
+
+        private const float CollisionWidth = 10.0f;
+        private const float CollisionHeight = 48.0f;
 
         // Data -------------------------------------
         public float delta;

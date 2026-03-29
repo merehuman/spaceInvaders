@@ -379,7 +379,7 @@ namespace SE456
                 pWallGroup.ActivateSprite(pSB_Invaders);
                 pWallGroup.ActivateCollisionSprite(pSB_Boxes);
 
-                WallTop pWallTop = new WallTop(GameObject.Name.WallTop, SpriteGame.Name.NullObject, 336, 716.5f, 672, 103);
+                WallTop pWallTop = new WallTop(GameObject.Name.WallTop, SpriteGame.Name.NullObject, 336, 705, 672, 103);
                 pWallTop.ActivateCollisionSprite(pSB_Boxes);
 
                 WallBottom pWallBottom = new WallBottom(GameObject.Name.WallBottom, SpriteGame.Name.NullObject, 336, 50, 672, 3);
@@ -500,6 +500,11 @@ namespace SE456
             //------------------------------------------------------
             GameObject pShieldRoot = ShieldFactory.CreateShields(75.0f, 150.0f);
 
+            // ColPair runs before GameObjectNodeMan.Update each frame; the first frame would otherwise
+            // use collision rects before BaseUpdateBoundingBox runs. Refresh invader + shield bounds once.
+            pGrid.Update();
+            pShieldRoot.Update();
+
             //------------------------------------------------------
             // Create Animations/commands
             //------------------------------------------------------
@@ -599,18 +604,15 @@ namespace SE456
                 ColPair pColPair = ColPairMan.Add(ColPair.Name.Alien_Wall, pGrid, pWallGroup);
                 pColPair.Attach(new GridObserver());
 
+                pColPair = ColPairMan.Add(ColPair.Name.Alien_Shield, pGrid, pShieldRoot);
+                pColPair.Attach(new DestroyShieldObserver());
+
                 // Missile Wall a collision pair
                 pColPair = ColPairMan.Add(ColPair.Name.Missile_Wall, pMissileGroup, pWallGroup);
-                //roof observer here
-                //ExplosionRoot explosionRoot = (ExplosionRoot)GameObjectNodeMan.Find(GameObject.Name.ExplosionRoot);
-                //Explosion explosion = new Explosion(GameObject.Name.Explosion, SpriteGame.Name.ExplosionRoof, this.x, this.y);
-                //explosion.ActivateSprite(SpriteBatchMan.Find(SpriteBatch.Name.Invaders));
-                //explosion.ActivateCollisionSprite(SpriteBatchMan.Find(SpriteBatch.Name.Boxes));
-                //explosionRoot.Add(explosion);
-                //TimerEventMan.Add(TimerEvent.Name.Explosion, new ExplosionAnimCmd(explosion), 0.1f);
-
+                // Last attached runs first: roof flash, then ship ready, then missile removal.
                 pColPair.Attach(new RemoveMissileObserver());
                 pColPair.Attach(new ShipReadyObserver());
+                pColPair.Attach(new WallRoofExplosionObserver());
 
                 //Missile vs Shield
                 pColPair = ColPairMan.Add(ColPair.Name.Misslie_Shield, pMissileGroup, pShieldRoot);
@@ -632,9 +634,10 @@ namespace SE456
                 pColPair.Attach(new RemoveBrickObserver());
                 pColPair.Attach(new SndObserver(sndEngine, explosion));
 
-                // Bomb vs Bottom
+                // Bomb vs Bottom (last attached notifies first: explosion at impact, then remove bomb)
                 pColPair = ColPairMan.Add(ColPair.Name.Bomb_Wall, pBombRoot, pWallGroup);
                 pColPair.Attach(new RemoveBombObserver());
+                pColPair.Attach(new WallBottomExplosionObserver());
 
                 // Bomb vs Missile
                 pColPair = ColPairMan.Add(ColPair.Name.Bomb_Missile, pBombRoot, pMissileGroup);
@@ -715,8 +718,9 @@ namespace SE456
                 // Update the sound
                 sndEngine.Update();
 
-                // Do the collision checks
+                ShipRemoveObserver.BeginCollisionProcessing();
                 ColPairMan.Process();
+                ShipRemoveObserver.ApplyPendingInvulnerabilityAfterCollisions();
 
                 // walk through all objects and push to flyweight
                 GameObjectNodeMan.Update();

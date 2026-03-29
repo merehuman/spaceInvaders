@@ -53,6 +53,15 @@ namespace SE456
             ColPair.Collide(b, pGameObj);
         }
 
+        public override void VisitGroup(InvaderGrid a)
+        {
+            // Invader formation bbox vs this shield — same pattern as WallRight.VisitGroup
+            ColPair pColPair = ColPairMan.GetActiveColPair();
+            Debug.Assert(pColPair != null);
+            pColPair.SetCollision(a, this);
+            pColPair.NotifyListeners();
+        }
+
         public override void Update()
         {
             // Go to first child
