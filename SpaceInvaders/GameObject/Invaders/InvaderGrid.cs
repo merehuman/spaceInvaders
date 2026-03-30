@@ -67,6 +67,16 @@ namespace SE456
             // proof its working
             //this.poColObj.poColRect.width -= 40.0f;
 
+            // Alien_Wall tests walls in sibling order; left/right can win before WallBottom — force game over when formation reaches the bottom strip.
+            if (GetTotalInvaders() > 0 && poColObj.poColRect.height > 0.0f)
+            {
+                float gridMinY = poColObj.poColRect.y - poColObj.poColRect.height * 0.5f;
+                if (gridMinY <= InvaderReachBottomMaxY)
+                {
+                    ShipRemoveObserver.count = 0;
+                }
+            }
+
             base.Update();
         }
 
@@ -183,8 +193,11 @@ namespace SE456
             }
         }
 
-        /// <summary>Set when the third wave is fully cleared (level becomes 4). ScenePlay consumes via PopPendingVictory().</summary>
+        /// <summary>Set when the fifth wave is fully cleared (level becomes 6). ScenePlay consumes via PopPendingVictory().</summary>
         private static bool pendingVictory = false;
+
+        /// <summary>Must match ScenePlay LoadOnEntry: WallBottom(..., 336, 50, 672, 3) — bottom edge of that rect (y + height/2).</summary>
+        private const float InvaderReachBottomMaxY = 50.0f + 3.0f * 0.5f;
 
         public static bool PopPendingVictory()
         {
@@ -216,8 +229,8 @@ namespace SE456
 
             pGrid.ClearAllColumns();
 
-            // Levels 2 and 3 spawn new waves; after clearing the third wave, level is 4 → victory (no new formation).
-            if (level > 3)
+            // Levels 2–5 spawn new waves; after clearing the fifth wave, level is 6 → victory (no new formation).
+            if (level > 5)
             {
                 pendingVictory = true;
                 return;

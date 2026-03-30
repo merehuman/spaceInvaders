@@ -219,10 +219,6 @@ namespace SE456
             pSpriteBatch.Attach(this.pSpriteProxy);
         }
 
-        /// <summary>
-        /// Second Attach on the same SpriteBase leaves an orphan SpriteNode in the batch (back-pointer is overwritten).
-        /// Shield bricks are recreated from the ghost pool and ActivateSprite runs again — leaked nodes draw forever.
-        /// </summary>
         private static void privDetachSpriteBaseIfBatched(SpriteBase pSprite)
         {
             if (pSprite != null && pSprite.HasSpriteNode())
