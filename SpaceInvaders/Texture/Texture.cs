@@ -67,7 +67,7 @@ namespace SE456
         {
             // reset with a default texture
             Debug.Assert(this.poAzulTexture != null);
-            this.poAzulTexture.Set("HotPink.t.azul", Azul.Filter.Filter_Default);
+            this.poAzulTexture.Set("Resources\\HotPink.t.azul", Azul.Filter.Filter_Default);
 
             this.mName = Name.Uninitialized;
 

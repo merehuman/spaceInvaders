@@ -22,7 +22,7 @@ namespace SE456
 
             SpriteBatch pSB_Texts = SpriteBatchMan.Add(SpriteBatch.Name.Texts);
 
-            TextureMan.Add(Texture.Name.Consolas36pt, "consolas36pt.t.azul");
+            TextureMan.Add(Texture.Name.Consolas36pt, "Consolas36pt.t.azul");
             GlyphMan.AddXml("Consolas36pt.xml", Glyph.Name.Consolas36pt, Texture.Name.Consolas36pt);
 
             //------------------------------------------------------

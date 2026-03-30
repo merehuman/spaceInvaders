@@ -40,8 +40,8 @@ namespace SE456
 			}
 
             // Preload these
-			TextureMan.Add(Texture.Name.HotPink, "HotPink.t.azul");
-            TextureMan.Add(Texture.Name.NullObject, "HotPink.t.azul");
+			TextureMan.Add(Texture.Name.HotPink, "Resources\\HotPink.t.azul");
+            TextureMan.Add(Texture.Name.NullObject, "Resources\\HotPink.t.azul");
 		}
 		public static void Destroy(bool bPrintEnable = false)
 		{
