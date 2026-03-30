@@ -2,19 +2,19 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-  <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-  <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-  <ProjectGuid>{67BB892E-3231-4FED-897D-6D1D06D6E1CB}</ProjectGuid>
-  <OutputType>WinExe</OutputType>
-  <RootNamespace>SE456</RootNamespace>
-  <AssemblyName>SpaceInvaders</AssemblyName>
-  <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-  <FileAlignment>512</FileAlignment>
-  <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-  <WarningLevel>4</WarningLevel>
-  <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-  <Deterministic>true</Deterministic>
-</PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{67BB892E-3231-4FED-897D-6D1D06D6E1CB}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>SE456</RootNamespace>
+    <AssemblyName>SpaceInvaders</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
@@ -28,12 +28,10 @@
   <PropertyGroup>
     <StartupObject>SE456.Program</StartupObject>
   </PropertyGroup>
-  <PropertyGroup />
   <PropertyGroup>
     <Win32Resource>
     </Win32Resource>
   </PropertyGroup>
-  <PropertyGroup />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <DebugSymbols>false</DebugSymbols>
     <OutputPath>bin\Release\</OutputPath>
@@ -270,90 +268,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-<Content Include="Resources\Aliens.t.azul">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\Aliens.t.azul</Link>
-</Content>
-<Content Include="Resources\Aliens.tga">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\Aliens.tga</Link>
-</Content>
-<Content Include="Resources\Birds.t.azul">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\Birds.t.azul</Link>
-</Content>
-<Content Include="Resources\Birds.tga">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\Birds.tga</Link>
-</Content>
-<Content Include="Resources\Birds_N_Shield.t.azul">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\Birds_N_Shield.t.azul</Link>
-</Content>
-<Content Include="Resources\Birds_N_Shield.tga">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\Birds_N_Shield.tga</Link>
-</Content>
-<Content Include="Resources\Consolas20pt.t.azul">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\Consolas20pt.t.azul</Link>
-</Content>
-<Content Include="Resources\Consolas20pt.tga">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\Consolas20pt.tga</Link>
-</Content>
-<Content Include="Resources\Consolas36pt.t.azul">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\Consolas36pt.t.azul</Link>
-</Content>
-<Content Include="Resources\Consolas36pt.tga">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\Consolas36pt.tga</Link>
-</Content>
-<Content Include="Resources\Consolas20pt.xml">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\Consolas20pt.xml</Link>
-</Content>
-<Content Include="Resources\Consolas36pt.png">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\Consolas36pt.png</Link>
-</Content>
-<Content Include="Resources\Consolas36pt.xml">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\Consolas36pt.xml</Link>
-</Content>
-<Content Include="Resources\HotPink.t.azul">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\HotPink.t.azul</Link>
-</Content>
-<Content Include="Resources\HotPink.tga">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\HotPink.tga</Link>
-</Content>
-<Content Include="Resources\PacMan.t.azul">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\PacMan.t.azul</Link>
-</Content>
-<Content Include="Resources\PacMan.tga">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\PacMan.tga</Link>
-</Content>
-<Content Include="Resources\SpaceInvaders_ROM.t.azul">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\SpaceInvaders_ROM.t.azul</Link>
-</Content>
-<Content Include="Resources\SpaceInvaders_ROM.tga">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\SpaceInvaders_ROM.tga</Link>
-</Content>
-<Content Include="Resources\Stitch.t.azul">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\Stitch.t.azul</Link>
-</Content>
-<Content Include="Resources\Stitch.tga">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\Stitch.tga</Link>
-</Content>
     <None Include="_Diagrams\Animation.cd" />
     <None Include="_Diagrams\Collision Diagram.cd" />
     <None Include="_Diagrams\Composite.cd" />
@@ -379,87 +293,173 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon.ico" />
-    <!-- Native Azul + irrKlang deps must sit next to SpaceInvaders.exe or SpaceInvadersDebugX86.dll fails to load. -->
+    <!-- Native DLLs: must sit flat next to SpaceInvaders.exe -->
     <Content Include="Resources\Engine_X86Debug.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>Engine_X86Debug.dll</Link>
     </Content>
-<Content Include="Resources\explosion.wav">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\explosion.wav</Link>
-</Content>
-<Content Include="Resources\fastinvader1.wav">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\fastinvader1.wav</Link>
-</Content>
-<Content Include="Resources\fastinvader2.wav">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\fastinvader2.wav</Link>
-</Content>
-<Content Include="Resources\fastinvader3.wav">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\fastinvader3.wav</Link>
-</Content>
-<Content Include="Resources\fastinvader4.wav">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\fastinvader4.wav</Link>
-</Content>
-<Content Include="Resources\File_X86Debug.dll">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>File_X86Debug.dll</Link>
-</Content>
-<Content Include="Resources\ikpFlac.dll">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>ikpFlac.dll</Link>
-</Content>
-<Content Include="Resources\ikpMP3.dll">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>ikpMP3.dll</Link>
-</Content>
-<Content Include="Resources\invaderkilled.wav">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\invaderkilled.wav</Link>
-</Content>
-<Content Include="Resources\irrKlang.NET4.dll">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>irrKlang.NET4.dll</Link>
-</Content>
-<Content Include="Resources\Manager_X86Debug.dll">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Manager_X86Debug.dll</Link>
-</Content>
-<Content Include="Resources\Math_X86Debug.dll">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Math_X86Debug.dll</Link>
-</Content>
-<Content Include="Resources\PCSTree_X86Debug.dll">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>PCSTree_X86Debug.dll</Link>
-</Content>
-<Content Include="Resources\shoot.wav">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\shoot.wav</Link>
-</Content>
-<Content Include="Resources\SpaceInvadersDebugX86.dll">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>SpaceInvadersDebugX86.dll</Link>
-</Content>
-<Content Include="Resources\theme.wav">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\theme.wav</Link>
-</Content>
-<Content Include="Resources\Time_X86Debug.dll">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Time_X86Debug.dll</Link>
-</Content>
-<Content Include="Resources\ufo_highpitch.wav">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\ufo_highpitch.wav</Link>
-</Content>
-<Content Include="Resources\ufo_lowpitch.wav">
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  <Link>Resources\ufo_lowpitch.wav</Link>
-</Content>
+    <Content Include="Resources\File_X86Debug.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>File_X86Debug.dll</Link>
+    </Content>
+    <Content Include="Resources\Manager_X86Debug.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Manager_X86Debug.dll</Link>
+    </Content>
+    <Content Include="Resources\Math_X86Debug.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Math_X86Debug.dll</Link>
+    </Content>
+    <Content Include="Resources\PCSTree_X86Debug.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>PCSTree_X86Debug.dll</Link>
+    </Content>
+    <Content Include="Resources\Time_X86Debug.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Time_X86Debug.dll</Link>
+    </Content>
+    <Content Include="Resources\SpaceInvadersDebugX86.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>SpaceInvadersDebugX86.dll</Link>
+    </Content>
+    <Content Include="Resources\irrKlang.NET4.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>irrKlang.NET4.dll</Link>
+    </Content>
+    <Content Include="Resources\ikpFlac.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>ikpFlac.dll</Link>
+    </Content>
+    <Content Include="Resources\ikpMP3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>ikpMP3.dll</Link>
+    </Content>
+    <!-- Textures: flat next to exe (Azul engine resolves relative to working dir) -->
+    <Content Include="Resources\Aliens.t.azul">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Aliens.t.azul</Link>
+    </Content>
+    <Content Include="Resources\Aliens.tga">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Aliens.tga</Link>
+    </Content>
+    <Content Include="Resources\Birds.t.azul">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Birds.t.azul</Link>
+    </Content>
+    <Content Include="Resources\Birds.tga">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Birds.tga</Link>
+    </Content>
+    <Content Include="Resources\Birds_N_Shield.t.azul">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Birds_N_Shield.t.azul</Link>
+    </Content>
+    <Content Include="Resources\Birds_N_Shield.tga">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Birds_N_Shield.tga</Link>
+    </Content>
+    <Content Include="Resources\Consolas20pt.t.azul">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Consolas20pt.t.azul</Link>
+    </Content>
+    <Content Include="Resources\Consolas20pt.tga">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Consolas20pt.tga</Link>
+    </Content>
+    <Content Include="Resources\Consolas20pt.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Consolas20pt.xml</Link>
+    </Content>
+    <Content Include="Resources\Consolas36pt.t.azul">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Consolas36pt.t.azul</Link>
+    </Content>
+    <Content Include="Resources\Consolas36pt.tga">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Consolas36pt.tga</Link>
+    </Content>
+    <Content Include="Resources\Consolas36pt.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Consolas36pt.xml</Link>
+    </Content>
+    <Content Include="Resources\Consolas36pt.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Consolas36pt.png</Link>
+    </Content>
+    <Content Include="Resources\HotPink.t.azul">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>HotPink.t.azul</Link>
+    </Content>
+    <Content Include="Resources\HotPink.tga">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>HotPink.tga</Link>
+    </Content>
+    <Content Include="Resources\PacMan.t.azul">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>PacMan.t.azul</Link>
+    </Content>
+    <Content Include="Resources\PacMan.tga">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>PacMan.tga</Link>
+    </Content>
+    <Content Include="Resources\SpaceInvaders_ROM.t.azul">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>SpaceInvaders_ROM.t.azul</Link>
+    </Content>
+    <Content Include="Resources\SpaceInvaders_ROM.tga">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>SpaceInvaders_ROM.tga</Link>
+    </Content>
+    <Content Include="Resources\Stitch.t.azul">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Stitch.t.azul</Link>
+    </Content>
+    <Content Include="Resources\Stitch.tga">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Stitch.tga</Link>
+    </Content>
+    <!-- Audio: flat next to exe -->
+    <Content Include="Resources\explosion.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>explosion.wav</Link>
+    </Content>
+    <Content Include="Resources\fastinvader1.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>fastinvader1.wav</Link>
+    </Content>
+    <Content Include="Resources\fastinvader2.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>fastinvader2.wav</Link>
+    </Content>
+    <Content Include="Resources\fastinvader3.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>fastinvader3.wav</Link>
+    </Content>
+    <Content Include="Resources\fastinvader4.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>fastinvader4.wav</Link>
+    </Content>
+    <Content Include="Resources\invaderkilled.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>invaderkilled.wav</Link>
+    </Content>
+    <Content Include="Resources\shoot.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>shoot.wav</Link>
+    </Content>
+    <Content Include="Resources\theme.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>theme.wav</Link>
+    </Content>
+    <Content Include="Resources\ufo_highpitch.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>ufo_highpitch.wav</Link>
+    </Content>
+    <Content Include="Resources\ufo_lowpitch.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>ufo_lowpitch.wav</Link>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -21,7 +21,11 @@ namespace SE456
         //-----------------------------------------------------------------------------
         public override void Initialize()
 		{
-			// Game Window Device setup
+            System.IO.Directory.SetCurrentDirectory(
+            System.AppDomain.CurrentDomain.BaseDirectory
+            );
+
+            // Game Window Device setup
             this.SetWindowName("Space Invaders");
             this.SetWidthHeight(672, 768);
 			this.SetClearColor(0.0f, 0.0f, 0.0f, 1.0f);
